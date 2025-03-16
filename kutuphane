@@ -40,3 +40,26 @@ uyeNo int foreign key(uyeNo) references uyeler(uyeNo),
 kutuphaneNo int foreign key(kutuphaneNo) references kutuphaneT(kutuphaneNo),
 ISBN int foreign key(ISBN) references kitaplar(ISBN)
 );
+create table yazarlar(
+yazarNo nvarchar(20) not null primary key,
+yazarAdi nvarchar(50) not null,
+yazarSoyadi nvarchar(50) not null,
+ISBN int Foreign key (ISBN) references kitaplar(ISBN)
+);
+create table kategoriler(
+kategoriNo nvarchar(50) not null primary key,
+kategoriAdi nvarchar(50) not null,
+ISBN int foreign key (ISBN) references kitaplar(ISBN)
+);
+create table kitapkategorisi(
+kategoriNo nvarchar(50) foreign key (kategoriNo) references kategoriler(kategoriNo),
+ISBN int foreign key (ISBN) references kitaplar(ISBN)
+);
+create table yazar(
+ISBN int foreign key (ISBN) references kitaplar(ISBN),
+yazarNo nvarchar(20) foreign key (yazarNo) references yazarlar(yazarNo) 
+);
+create table kutuphanedekikitaplar(
+ISBN int foreign key (ISBN) references kitaplar(ISBN),
+kutuphaneNo int Foreign Key (kutuphaneNo) references kutuphane (kutuphaneNo)
+);
